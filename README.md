@@ -1,6 +1,4 @@
-# Boarding House
-
-THe Oakland Follower-Sentinel is a demo Spring '83 client that you can access at TKTK.
+The Oakland Follower-Sentinel is a demo Spring '83 client that you can access at TKTK.
 
 ![A screenshot of the demo client, showing several boards of varying colors, some with clever styles applied. On the right side, there's a panel for publishing a board of your own.](demo-client-screenshot.png)
 
