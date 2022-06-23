@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+
+<title>The Oakland Follower-Sentinel</title>
+<meta charset="utf-8">
+
+<!-- this rules -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; font-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; form-action *; connect-src *;">
+<!-- ref: worker-src blob: -->
+
+<!-- an offering for the jealous gods -->
+<meta property="og:site_name" content="The Oakland Follower-Sentinel">
+<meta property="og:url" content="https://oakfs.net/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Robin Sloan">
+<meta property="og:description" content="A Spring '83 client."/>
+<meta property="og:image" content="">
+<meta property="twitter:image" content="">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@robinsloan">
+<meta name="twitter:creator" content="@robinsloan">
+<meta name="twitter:title" content="The Oakland Follower-Sentinel">
+
+<link rel="stylesheet" href="/style/style.css">
+<script src="/js/noble-ed25519.js"></script>
+<script src="/js/marked.min.js"></script>
+<script src="/ace/ace.js"></script>
+<script src="/ace/ext-language_tools.js"></script>
+<script src="/js/app.js"></script>
+
+</head>
+
+<body>
+
+<main>
+  <!-- Modal view for editing Springfile -->
+  <springfile-modal>
+    <textarea spellcheck="false"></textarea>
+  </springfile-modal>
+
+  <preview-modal>
+    <board-preview></board-preview>
+  </preview-modal>
+
+  <!-- Overall page container for items -->
+  <item-zone>
+    <!-- Templates are cool! -->
+    <template id="board-preview-template">
+      <board-item class="preview">
+        <input id="preview-url" type="text" readonly>
+        <board-area>
+          <!-- Board HTML fragment goes here -->
+          <board-content></board-content>
+        </board-area>
+      </board-item>
+    </template>
+
+    <template id="board-template">
+      <board-item>
+        <board-area>
+          <!-- Little "wot is this" tag -->
+          <board-label>hello world</board-label>
+
+          <!-- Board HTML fragment goes here -->
+          <board-content></board-content>
+
+          <!-- The all-important view source panel -->
+          <view-source>
+            <textarea readonly></textarea>
+          </view-source>
+        </board-area>
+      </board-item>
+    </template>
+
+    <template id="feed-template">
+      <feed-item>
+        <feed-area></feed-area>
+      </feed-item>
+    </template>
+
+    <!-- Where the items actually live -->
+    <item-banner>
+      <h1><img src="/media/oakfs-banner.gif" alt="The Oakland Follower-Sentinel, printed in a newspaper-ish blackletter"></h1>
+      <h2>A <a href="https://www.robinsloan.com/lab/specifying-spring-83/">Spring &rsquo;83</a> client. <a href="#" target="_blank">You can read the manual.</a><br/><i>It might not work in your browser, and that's OK.</i><br/></h2>
+    </item-banner>
+    <item-grid>
+    </item-grid>
+  </item-zone>
+
+  <editor-zone>
+    <drop-zone>
+      <p>Drag your keypair file here, or</p>
+      <label>choose a file
+        <input type="file" id="keypair-upload" style="position: absolute; top: -1000rem;">
+      </label>
+      <p>Need a keypair? <a href="/generate/">You can generate one.</a></p>
+    </drop-zone>
+
+    <p>Your Spring '83 URL is:</p>
+
+    <input id="spring-url" type="text" readonly>
+
+    <p>Edit your board here. You can use Markdown.</p>
+    <editor-wrap>
+      <pre class="editor" id="editor"></pre>
+    </editor-wrap>
+
+    <byte-counter></byte-counter>
+
+    <publish-button>Publish</publish-button>
+
+    <server-zone>
+      <server-choice>
+        <label for="home-server">Home server</label>
+        <select id="home-server">
+          <option value="https://bogbody.biz/">bogbody.biz</option>
+          <!--
+          <option value="https://0l0.lol/">0l0.lol</option>
+          <option value="https://spring83.kindrobot.ca/">spring83.kindrobot.ca</option>
+          <option value="https://localhost:8787/">localhost</option>
+          -->
+        </select>
+      </server-choice>
+
+      <server-choice>
+        <label for="backup-server">Mirror server</label>
+        <select id="backup-server">
+          <!-- <option value="https://bogbody.biz/">bogbody.biz</option> -->
+          <option value="https://0l0.lol/">0l0.lol</option>
+          <option value="https://spring83.kindrobot.ca/">spring83.kindrobot.ca</option>
+          <option value="https://localhost:8787/">localhost</option>
+          <option value="none">none</option>
+        </select>
+      </server-choice>
+    </server-zone>
+
+    <action-row>
+      <p>Springfile:</p>
+      <action-link class="action edit-springfile">edit</action-link>
+    </action-row>
+
+    <action-row>
+      <p>Keypair:</p>
+      <action-link class="action save-keypair">save</action-link>
+      <action-link class="action forget-keypair dangerous">forget</action-link>
+    </action-row>
+    <action-row>
+      <p>Client:</p>
+      <action-link class="action force-refresh">force refresh</action-link>
+      <action-link class="action factory-reset dangerous">factory reset</action-link>
+    </action-row>
+  </editor-zone>
+
+</main>
+</body>
+</html>
