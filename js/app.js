@@ -389,6 +389,9 @@ Client.loadKeypairFromString = async function(fileString) {
   Client.updateSpringURLDisplay();
   Client.hideDropZone();
 
+  // Synchronize with stored Springfile, if we have it
+  Client.pullSpringfile();
+
   // Doing this here to get the new public key included in parseSpringfile()
   Client.parseSpringfile();
   Client.reloadItemGrid();
@@ -651,7 +654,7 @@ Client.pullSpringfile = async function() {
 
     if (response.ok) {
       const body = await response.text();
-      if (body !== Client.springfileEditor.value) {
+      if ((body !== null) && (body !== Client.springfileEditor.value)) {
         Client.springfileEditor.value = body;
         localStorage.setItem("springfile", body);
         console.log("loaded springfile editor with synced content, woo");
@@ -1535,17 +1538,23 @@ There's currently one (1) configuration setting, which is the line that comes ne
 
 set sync true
 
-Robin's board
-https://bogbody.biz/1e4bed50500036e8e2baef40cb14019c2d49da6dfee37ff146e45e5c783e0123
+Boards to follow
+https://bogbody.biz/0036a2f1d481668649bc5c2a50f40cc9a65d3244eff0c0002af812e6183e0523
 
 Alan Jacobs
 https://blog.ayjay.org/feed/
 
+Hiroko's blog
+http://rhiroko.blog.fc2.com/
+
 Spring '83 dev board
 https://bogbody.biz/ca93846ae61903a862d44727c16fed4b80c0522cab5e5b8b54763068b83e0623
 
-Hiroko's blog
-http://rhiroko.blog.fc2.com/
+honor
+https://bogbody.biz/e310afd5a0529279947e4bb79ae686543102a8e864867dd4b8e90101e83e0123
+
+Chase
+https://bogbody.biz/45deb6f6d50b7b2e3a0aba5aa199823a3c0e64e5f604196e429bc41d683e0623
 
 Peter, keymaster
 https://bogbody.biz/47e0f417f42634b42917124c8c9709714ac28c632830c2f96f8e52beb83e0623
@@ -1560,6 +1569,9 @@ https://eukaryotewritesblog.com/feed/
 
 Mandy Brown (mostly books)
 https://aworkinglibrary.com/feed/index.xml
+
+Robin's board
+https://bogbody.biz/1e4bed50500036e8e2baef40cb14019c2d49da6dfee37ff146e45e5c783e0123
 
 Ryan
 https://bogbody.biz/f539c49d389b1e141c97450cdabc83d41615303106c07f63c8975b5dc83e0623
@@ -1578,12 +1590,6 @@ https://www.robinsloan.com/feed.xml
 
 Another Robin
 https://www.robinrendle.com/
-
-honor
-https://bogbody.biz/e310afd5a0529279947e4bb79ae686543102a8e864867dd4b8e90101e83e0123
-
-Chase
-https://bogbody.biz/45deb6f6d50b7b2e3a0aba5aa199823a3c0e64e5f604196e429bc41d683e0623
 
 makeworld
 https://bogbody.biz/3cba5aede1312bda77c2a329c61aadb893dae1c160bd4c5b05d3bad3783e1023

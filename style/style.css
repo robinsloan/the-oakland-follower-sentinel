@@ -244,7 +244,6 @@ item-zone {
   top: 0;
   width: calc(100vw - var(--column-width));
   min-height: 100%;
-  padding: 1rem;
 }
 
 item-banner {
@@ -489,6 +488,9 @@ editor-zone drop-zone {
   height: 100%;
   z-index: 1000;
   background-color: var(--c-cornflower);
+
+  /* this is a hack, because I don't know why I'm getting overflow-x in the first place */
+  overflow-x: hidden;
 }
 
 editor-zone drop-zone p {
