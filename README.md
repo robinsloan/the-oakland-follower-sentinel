@@ -1,4 +1,4 @@
-The Oakland Follower-Sentinel is a demo Spring '83 client that you can access at `https://followersentinel.com`.
+The Oakland Follower-Sentinel is a demo Spring '83 client that you can access on the web at [followersentinel.com](https://followersentinel.com) or run locally on your computer.
 
 ![A screenshot of the demo client, showing several boards of varying colors, some with clever styles applied. On the right side, there's a panel for publishing a board of your own.](demo-client-screenshot.png)
 
@@ -47,6 +47,8 @@ ruby serve.rb
 ```
 
 This script is included as a convenience; you can substitute any directory serving scheme, or even host the client on a website of your own.
+
+Then, visit `http://localhost:8000/` and things should work normally.
 
 ## Status
 

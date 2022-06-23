@@ -1421,7 +1421,7 @@ Client.parseFeedSourceResponse = async function(feedKey, fetchedUrl,
         let itemTitleText = itemTitleElement?.text || itemTitleElement?.childNodes[0]?.nodeValue || href;
 
         let displayedTitle = Client.hypocorisms[feedKey] ? Client.hypocorisms[feedKey] : feedTitleText;
-        const content = `<h2><a href="${href}" target="_new">${itemTitleText}</a></h2><h1>${displayedTitle}</h1>`;
+        const content = `<h1>${displayedTitle}</h1><h2><a href="${href}" target="_new">${itemTitleText}</a></h2>`;
 
         Client.setFeedHTML(feedKey, content);
         Client.refreshFeedItem(feedKey);
