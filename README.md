@@ -1,4 +1,4 @@
-The Oakland Follower-Sentinel is a demo Spring '83 client that you can access on the web at [followersentinel.com](https://followersentinel.com) or run locally on your computer.
+The Oakland Follower-Sentinel is a demo Spring '83 client that you can try on the web at [followersentinel.com](https://followersentinel.com) or run locally on your computer.
 
 ![A screenshot of the demo client, showing several boards of varying colors, some with clever styles applied. On the right side, there's a panel for publishing a board of your own.](demo-client-screenshot.png)
 
