@@ -285,12 +285,14 @@ item-grid {
   align-items: center;
   */
 
+  /* I love CSS columns!! */
   column-width: var(--column-width);
   column-count: auto;
 
   width: 100%;
   min-height: 100%;
   height: auto;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 

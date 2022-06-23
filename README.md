@@ -2,7 +2,7 @@ The Oakland Follower-Sentinel is a demo Spring '83 client that you can access on
 
 ![A screenshot of the demo client, showing several boards of varying colors, some with clever styles applied. On the right side, there's a panel for publishing a board of your own.](demo-client-screenshot.png)
 
-If you haven't read anything about Spring '83 yet, everything that follows will probably be confusing. I recommend starting with [this narrative description](https://github.com/robinsloan/spring-83-spec) and then perhaps reading [the protocol specification](https://github.com/robinsloan/spring-83-spec).
+If you haven't read anything about Spring '83 yet, what follows will probably be confusing. I recommend starting with [this narrative description](https://github.com/robinsloan/spring-83-spec) and then perhaps continuing on to [the protocol specification](https://github.com/robinsloan/spring-83-spec).
 
 This is speculative software intended to invite consideration and imagination; it doesn't have any "users" yet, only co-investigators. That's you!
 
