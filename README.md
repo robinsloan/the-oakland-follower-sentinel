@@ -1,4 +1,4 @@
-The Oakland Follower-Sentinel is a demo Spring '83 client that you can access at TKTK.
+The Oakland Follower-Sentinel is a demo Spring '83 client that you can access at `https://followersentinel.com`.
 
 ![A screenshot of the demo client, showing several boards of varying colors, some with clever styles applied. On the right side, there's a panel for publishing a board of your own.](demo-client-screenshot.png)
 
@@ -32,7 +32,7 @@ The client tries its best to synchronize your Springfile across different browse
 
 `set sync false`
 
-Data loss is inevitable and assured. Happily, it's a breeze to back up a Springfile. Just email it to yourself!
+**Data loss is inevitable and assured.** Happily, it's a breeze to back up a Springfile. Just email it to yourself!
 
 In additional to HTML, you can compose your board in Markdown, keeping in mind that Markdown permits arbitrary mixing-and-matching: write a couple paragraphs in Markdown, throw in a little HTML confection. Easy!
 
