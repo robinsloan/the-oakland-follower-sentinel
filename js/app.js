@@ -971,7 +971,8 @@ Client.publishBackupBoard = async function(fullBoard, signature) {
       mode: "cors",
       headers: {
         "Content-Type": "text/html;charset=utf-8",
-        "Spring-Signature": signature
+        "Spring-Signature": signature,
+        "Spring-Version": "83"
       },
       body: Client.encoder.encode(fullBoard) // MARK -- MAYBE
     });
@@ -1017,7 +1018,8 @@ Client.publishBoard = async function() {
       mode: "cors",
       headers: {
         "Content-Type": "text/html;charset=utf-8",
-        "Spring-Signature": signature
+        "Spring-Signature": signature,
+        "Spring-Version": "83"
       },
       body: Client.encoder.encode(fullBoard) // MARK -- MAYBE
     });
@@ -1158,7 +1160,8 @@ Client.checkBoardSource = async function(key, forceCheck = false) {
       method: "GET",
       mode: "cors",
       headers: {
-        "If-Modified-Since": new Date(ifModifiedSince).toUTCString()
+        "If-Modified-Since": new Date(ifModifiedSince).toUTCString(),
+        "Spring-Version": "83"
       }
     });
   } catch (e) {
