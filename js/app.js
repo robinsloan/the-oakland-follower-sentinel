@@ -63,23 +63,9 @@ Client.setupEditor = async function() {
 Client.setup = async function() {
   Client.setupEditor();
 
-  // -- Link click handling, which does several important things
-
-  // https://stackoverflow.com/questions/12235585/is-there-a-way-to-open-all-a-href-links-on-a-page-in-new-windows
-  document.body.addEventListener("click", (e) => {
-    // composedPath, weeeird
-    // https://pm.dartus.fr/blog/a-complete-guide-on-shadow-dom-and-event-propagation/
-    const clickedElement = e.composedPath()[0];
-    if (clickedElement.nodeName.toUpperCase() === "A") {
-      clickedElement.target = "_blank";
-      if (clickedElement.href.match(Client.SPRING_URL_REGEX)) {
-        Client.previewBoardAtURL(clickedElement.href);
-        e.preventDefault();
-      }
-    }
-  }, true);
-
   // -- Global element handles --
+
+  Client.main = document.querySelector("main");
 
   Client.previewModal = document.querySelector("preview-modal");
   Client.boardPreview = document.querySelector("board-preview");
@@ -90,6 +76,7 @@ Client.setup = async function() {
   const homeServerSaved = Client.getHomeServer();
   if (!homeServerSaved) {
     localStorage.setItem("home-server", "https://bogbody.biz/");
+    Client.getHomeServer.value = Client.getHomeServer();
   } else {
     Client.homeServerSelect.value = homeServerSaved;
   }
@@ -97,12 +84,10 @@ Client.setup = async function() {
   const backupServerSaved = Client.getBackupServer();
   if (!backupServerSaved) {
     localStorage.setItem("backup-server", "https://spring83.kindrobot.ca/");
+    Client.backupServerSelect.value = Client.getBackupServer();
   } else {
     Client.backupServerSelect.value = backupServerSaved;
   }
-
-  Client.getHomeServer.value = Client.getHomeServer();
-  Client.backupServerSelect.value = Client.getBackupServer();
 
   Client.springURLDisplay = document.querySelector("editor-zone input#spring-url");
 
@@ -120,7 +105,6 @@ Client.setup = async function() {
   Client.showingSpringFileEditor = false;
   Client.showingBoardPreview = false;
   Client.okayToPublish = true;
-
 
   // -- Intersection observer --
 
@@ -200,6 +184,8 @@ Client.setup = async function() {
     }
   });
 
+ // -- Springfile modal --
+
   // When you're viewing the Springfile modal and you click outside the textarea, it closes
   Client.springfileModal.addEventListener("mousedown", (e) => {
     if (e.target.tagName.toLowerCase() == "springfile-modal") {
@@ -230,6 +216,14 @@ Client.setup = async function() {
     }
   });
 
+  // -- Spring URL display field behavior --
+
+  Client.springURLDisplay.addEventListener("click", (e) => {
+    e.target.setSelectionRange(0, e.target.value.length);
+  });
+
+  // -- Keyboard shortcuts --
+
   // Escape key shortcut to show/hide Springfile editor
   document.addEventListener("keydown", (e) => {
     if (e.code == "Escape") {
@@ -241,20 +235,30 @@ Client.setup = async function() {
     }
   });
 
-  // -- Keypair --
-
-  const secret = Client.getSecretKey();
-  const public = Client.getPublicKey();
-  if (secret && public) {
-    Client.hideDropZone();
-    Client.updateSpringURLDisplay();
-  }
-
-  // -- Public key display field --
-
-  Client.springURLDisplay.addEventListener("click", (e) => {
-    e.target.setSelectionRange(0, e.target.value.length);
+  // Cmd-shift-P key shortcut to show/hide publish panel
+  document.addEventListener("keydown", (e) => {
+    if (e.code == "KeyP") {
+      if (e.shiftKey && e.metaKey) {
+        Client.main.classList.toggle("minimized");
+      }
+    }
   });
+
+  // -- Link click handling, which does several important things
+
+  // https://stackoverflow.com/questions/12235585/is-there-a-way-to-open-all-a-href-links-on-a-page-in-new-windows
+  document.body.addEventListener("click", (e) => {
+    // composedPath, weeeird
+    // https://pm.dartus.fr/blog/a-complete-guide-on-shadow-dom-and-event-propagation/
+    const clickedElement = e.composedPath()[0];
+    if (clickedElement.nodeName.toUpperCase() === "A") {
+      clickedElement.target = "_blank";
+      if (clickedElement.href.match(Client.SPRING_URL_REGEX)) {
+        Client.previewBoardAtURL(clickedElement.href);
+        e.preventDefault();
+      }
+    }
+  }, true);
 
   // -- Action buttons --
 
@@ -292,6 +296,15 @@ Client.setup = async function() {
     });
   });
 
+  // -- Keypair setup --
+
+  const secret = Client.getSecretKey();
+  const public = Client.getPublicKey();
+  if (secret && public) {
+    Client.hideDropZone();
+    Client.updateSpringURLDisplay();
+  }
+
   // -- Boot it up --
 
   let springfileContent = localStorage.getItem("springfile");
@@ -308,7 +321,7 @@ Client.setup = async function() {
   Client.parseSpringfile();
   Client.reloadItemGrid(true) // force;
 
-  // No need to do this, becuase it happens automatically with reloadItemGrid:
+  // No need to do this, because it happens automatically with reloadItemGrid:
   // Client.checkSources(true); // force;
   setInterval(Client.checkSources, 1000*60);
 }
@@ -629,12 +642,15 @@ Client.setSpringfileModified = function(httpDate) {
 
 Client.pullSpringfile = async function() {
   if (Client.getShouldSync() !== true) {
-    console.log("Syncing is off, so aborting pull.")
+    console.log("Syncing is off, so I won't pull the Springfile.")
     return;
   }
 
+  console.log("Pulling Springfile");
+
   const public = Client.getPublicKey();
   const secret = Client.getSecretKey();
+  // Very simple authorization here: prove it's you!
   const getAsBytes = Client.encoder.encode("GET");
   const signatureBytes = await nobleEd25519.sign(getAsBytes, secret);
   const signature = nobleEd25519.utils.bytesToHex(signatureBytes);
@@ -654,7 +670,9 @@ Client.pullSpringfile = async function() {
 
     if (response.ok) {
       const body = await response.text();
-      if ((body !== null) && (body !== Client.springfileEditor.value)) {
+      if ((body !== null) &&
+          (body !== "") &&
+          (body !== Client.springfileEditor.value)) {
         Client.springfileEditor.value = body;
         localStorage.setItem("springfile", body);
         console.log("loaded springfile editor with synced content, woo");
@@ -662,7 +680,7 @@ Client.pullSpringfile = async function() {
         Client.setSpringfileModified(modifiedHTTP);
         console.log("set springfile-modified to" + modifiedHTTP);
       } else {
-        console.log("pulled an identical springfile, meh");
+        console.log("pulled a springfile that was either identical or empty, meh");
       }
     }
 
@@ -674,11 +692,11 @@ Client.pullSpringfile = async function() {
 
 Client.pushSpringfile = async function() {
   if (Client.getShouldSync() !== true) {
-    console.log("Syncing is off, so aborting push.")
+    console.log("Syncing is off, so I won't push the Springfile.")
     return;
   }
 
-  console.log("PUSHING springfile...!");
+  console.log("Pushing Springfile");
 
   const springfile = localStorage.getItem("springfile");
   if (springfile === null) {
@@ -707,7 +725,7 @@ Client.pushSpringfile = async function() {
 
     if (response.status == 204) {
       Client.setSpringfileModified((new Date()).toUTCString());
-      console.log("synced springfile to remote server, wee");
+      console.log("successfully synced springfile to remote server");
     }
   } catch (e) {
     console.log("error in syncSpringFile, ugh");
@@ -767,12 +785,13 @@ Client.parseSpringfile = async function() {
     // in a world of many config flags, obviously this would be more robust
     if (trimmed.substr(0, 8).toLowerCase() === "set sync") {
       const parts = trimmed.split(" ");
-      const value = parts[2];
-      if (value.trim().toLowerCase() === "false") {
+      if (parts[2] === null) { return; }
+      const value = parts[2].trim().toLowerCase();
+      if (value === "true") {
+        console.log("leaving sync TRUE");
+      } else {
         console.log("setting sync FALSE");
         Client.setShouldSync(false);
-      } else {
-        console.log("leaving sync true");
       }
       return;
     }
@@ -784,7 +803,6 @@ Client.parseSpringfile = async function() {
         const keyMatch = url.pathname.match(Client.KEY_REGEX);
         if (keyMatch) {
           // It is a Spring '83 URL
-          // TODO: this is a stupid way of validating this, obviously
 
           // normalize
           let key = keyMatch[1].replace(/\//g, "").toLowerCase().trim();
@@ -858,7 +876,7 @@ Client.parseSpringfile = async function() {
 // -- Board editing --
 
 Client.clearDraftHTML = function() {
-  let public = Client.getPublicKey();
+  const public = Client.getPublicKey();
   if (public) {
     localStorage.removeItem(`draft-${public}`);
     return true;
@@ -868,7 +886,7 @@ Client.clearDraftHTML = function() {
 }
 
 Client.setDraftHTML = function(draftHTML) {
-  let public = Client.getPublicKey();
+  const public = Client.getPublicKey();
   if (public) {
     localStorage.setItem(`draft-${public}`, draftHTML);
     return true;
@@ -878,7 +896,7 @@ Client.setDraftHTML = function(draftHTML) {
 }
 
 Client.getDraftHTML = function() {
-  let public = Client.getPublicKey();
+  const public = Client.getPublicKey();
   if (public) {
     let draftHTML = localStorage.getItem(`draft-${public}`);
     if (draftHTML) {
@@ -954,6 +972,8 @@ Client.resetPublishError = async function() {
 }
 
 Client.publishBackupBoard = async function(fullBoard, signature) {
+  // tons of duplication here
+  // but I cannot currently be bothered to abstract it out
   const backup = Client.getBackupServer();
   if (backup === null || backup === "none") {
     console.log("skipping backup server");
@@ -1005,15 +1025,14 @@ Client.publishBoard = async function() {
     console.log("Hmm I screwed up my own signature");
   }
 
-  // TODO: some retry logic...
-
   Client.publishBackupBoard(fullBoard, signature); // fire and forget
+
+  // TODO: some retry logic...?
 
   const path = `${Client.getHomeServer()}${public}`;
 
-  let response;
   try {
-    response = await fetch(path, {
+    const response = await fetch(path, {
       method: "PUT",
       mode: "cors",
       headers: {
@@ -1105,10 +1124,10 @@ Client.reloadItemGrid = async function(forceCheck = false) {
 
   Object.keys(Client.sources).forEach(async (key) => {
     const source = Client.sources[key];
-    if (source["type"] === "board") {
+    if (source.type === "board") {
       Client.createBoardItem(key, forceCheck);
     }
-    if (source["type"] === "feed") {
+    if (source.type === "feed") {
       Client.createFeedItem(key, forceCheck);
     }
   });
@@ -1120,10 +1139,10 @@ Client.checkSources = async function(forceCheck = false) {
 
   Object.keys(Client.sources).forEach(async (key) => {
     const source = Client.sources[key];
-    if (source["type"] === "board") {
+    if (source.type === "board") {
       await Client.checkBoardSource(key, forceCheck);
     }
-    if (source["type"] === "feed") {
+    if (source.type === "feed") {
       await Client.checkFeedSource(key, forceCheck);
     }
   });
@@ -1165,7 +1184,7 @@ Client.checkBoardSource = async function(key, forceCheck = false) {
       }
     });
   } catch (e) {
-    console.log("Error with fetch; server not found? TODO: document.");
+    console.log("Error with board fetch; server not found?");
     console.log("Extending timeout with jittered exponential backoff.");
     source.timeout = source.timeout + Math.round(source.timeout * Math.random());
     source.timeout = Math.min(source.timeout, Client.MAX_TIMEOUT_SECONDS);
@@ -1214,6 +1233,9 @@ Client.checkBoardSource = async function(key, forceCheck = false) {
     // TODO mark server as untrustworthy
   }
 
+  // See, here I just treat the HTML as the "canonical" source of timestamps
+  // It's really a muddle
+  // TODO: clean up!
   const existingBoard = Client.getBoardHTML(key);
   if (existingBoard) {
     const existingTimestamp = await Client.lastModifiedInHTML(existingBoard);
@@ -1299,7 +1321,7 @@ Client.createBoardItem = function(key) {
 Client.refreshBoardItem = function(key) {
   let boardHTML = Client.getBoardHTML(key);
 
-  if (!boardHTML) {
+  if (boardHTML === null) {
     boardHTML = `
     <style>
       div {
@@ -1391,7 +1413,8 @@ Client.checkFeedSource = async function(feedKey, forceCheck = false) {
                           );
     }
   } catch (e) {
-    console.log(`error in checkFeedSource: ${e}`);
+    console.log("error in checkFeedSource:");
+    console.log(e);
   }
 }
 
@@ -1444,7 +1467,7 @@ Client.parseFeedSourceResponse = async function(feedKey, fetchedUrl,
         let trial = new URL(url);
         if (trial) {
           // We "annotate" the feedSource object with this new information
-          feedSource["feedUrl"] = trial.href;
+          feedSource.feedUrl = trial.href;
           Client.checkFeedSource(feedKey, true); // force
           return true;
         }
@@ -1454,7 +1477,7 @@ Client.parseFeedSourceResponse = async function(feedKey, fetchedUrl,
         try {
           let basename = new URL(fetchedUrl).href + "/";
           if (new URL(basename + url)) {
-            feedSource["feedUrl"] = basename + url;
+            feedSource.feedUrl = basename + url;
             Client.checkFeedSource(feedKey, true); // force
             return true;
           }
@@ -1502,7 +1525,7 @@ Client.createFeedItem = function(feedKey) {
 Client.refreshFeedItem = function(feedKey) {
   let feedHTML = Client.getFeedHTML(feedKey);
   // TODO I think this never executes, which is OK:
-  if (!feedHTML) {
+  if (feedHTML === null) {
     feedHTML = `<p>Couldn't find anything stored at ${Client.sources[feedKey].url} 😔</p>`;
   }
   const id = `feed-${feedKey}`;
@@ -1541,23 +1564,32 @@ There's currently one (1) configuration setting, which is the line that comes ne
 
 set sync true
 
+Robin's board
+https://bogbody.biz/1e4bed50500036e8e2baef40cb14019c2d49da6dfee37ff146e45e5c783e0123
+
 Boards to follow
 https://bogbody.biz/0036a2f1d481668649bc5c2a50f40cc9a65d3244eff0c0002af812e6183e0523
 
 Alan Jacobs
 https://blog.ayjay.org/feed/
 
-Hiroko's blog
-http://rhiroko.blog.fc2.com/
+Elisabeth Nicula's HTML art
+https://abjectsubli.me/feed.xml
+
+Sven, board artisan
+https://bogbody.biz/a5e8086dd47d0380ed16c641070636a3f06fc89b6f6dde45e756f70fc83e0723
 
 Spring '83 dev board
 https://bogbody.biz/ca93846ae61903a862d44727c16fed4b80c0522cab5e5b8b54763068b83e0623
 
-honor
+honor, artist
 https://bogbody.biz/e310afd5a0529279947e4bb79ae686543102a8e864867dd4b8e90101e83e0123
 
-Chase
+Chase, designer
 https://bogbody.biz/45deb6f6d50b7b2e3a0aba5aa199823a3c0e64e5f604196e429bc41d683e0623
+
+Chase's blog
+https://chasem.co/feed.xml
 
 Peter, keymaster
 https://bogbody.biz/47e0f417f42634b42917124c8c9709714ac28c632830c2f96f8e52beb83e0623
@@ -1565,25 +1597,16 @@ https://bogbody.biz/47e0f417f42634b42917124c8c9709714ac28c632830c2f96f8e52beb83e
 Pulp Covers
 https://pulpcovers.com/feed/
 
-Chase, designer
-https://chasem.co/feed.xml
-
 https://eukaryotewritesblog.com/feed/
 
 Mandy Brown (mostly books)
 https://aworkinglibrary.com/feed/index.xml
-
-Robin's board
-https://bogbody.biz/1e4bed50500036e8e2baef40cb14019c2d49da6dfee37ff146e45e5c783e0123
 
 Ryan
 https://bogbody.biz/f539c49d389b1e141c97450cdabc83d41615303106c07f63c8975b5dc83e0623
 
 TOOZE!
 https://adamtooze.substack.com/
-
-Sven, board artisan
-https://bogbody.biz/a5e8086dd47d0380ed16c641070636a3f06fc89b6f6dde45e756f70fc83e0723
 
 Matt Webb, the superbrain
 https://interconnected.org/home/feed
@@ -1597,7 +1620,7 @@ https://www.robinrendle.com/
 makeworld
 https://bogbody.biz/3cba5aede1312bda77c2a329c61aadb893dae1c160bd4c5b05d3bad3783e1023
 
-Maya (on vacation)
+Maya
 https://bogbody.biz/a4813793a806d066c18f8a2d07a403393fecda667e5ccaa6fd76cfd5683e1023
 
 Maya's blog
@@ -1620,11 +1643,11 @@ https://us16.campaign-archive.com/feed?u=30638b4a1754ffe5cdc9f22c1&id=31efc3f9d3
 Dirt newsletter
 https://dirt.substack.com/feed
 
-Elisabeth Nicula's HTML art
-https://abjectsubli.me/feed.xml
+Flywheel newsletter
+https://www.newsletter.rideflywheel.com/feed
 
-Ever-changing test board
-https://bogbody.biz/ab589f4dde9fce4180fcf42c7b05185b0a02a5d682e353fa39177995083e0583
+Hiroko's blog
+http://rhiroko.blog.fc2.com/
 
 100 Rabbits changelog
 https://100r.co/links/rss.xml
@@ -1639,4 +1662,7 @@ https://www.ruby-lang.org/en/feeds/news.rss
 
 Included to verify that broken feeds are handled appropriately:
 https://feeds.transistor.fm/cassettes-with-william-july
+
+Ever-changing test board
+https://bogbody.biz/ab589f4dde9fce4180fcf42c7b05185b0a02a5d682e353fa39177995083e0583
 `.trim();
