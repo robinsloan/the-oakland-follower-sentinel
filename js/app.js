@@ -737,8 +737,8 @@ Client.pushSpringfile = async function() {
 
 Client.parseSpringfile = async function() {
 
-  // reset default configs, to be "un-set" by Springfile
-  Client.setShouldSync(true);
+  // reset default configs, to be set by Springfile
+  Client.setShouldSync(false);
 
   let newSources = {};
   let index = 0;
@@ -788,10 +788,10 @@ Client.parseSpringfile = async function() {
       if (parts[2] === null) { return; }
       const value = parts[2].trim().toLowerCase();
       if (value === "true") {
-        console.log("leaving sync TRUE");
+        console.log("setting sync TRUE");
+        Client.setShouldSync(true);
       } else {
-        console.log("setting sync FALSE");
-        Client.setShouldSync(false);
+        console.log("leaving sync FALSE");
       }
       return;
     }
