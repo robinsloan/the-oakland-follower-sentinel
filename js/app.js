@@ -1596,9 +1596,6 @@ https://chasem.co/feed.xml
 Peter, keymaster
 https://bogbody.biz/47e0f417f42634b42917124c8c9709714ac28c632830c2f96f8e52beb83e0623
 
-Pulp Covers
-https://pulpcovers.com/feed/
-
 https://eukaryotewritesblog.com/feed/
 
 Mandy Brown (mostly books)
