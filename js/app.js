@@ -1552,9 +1552,11 @@ DEFAULT_BOARD_CSS = `
 `.trim();
 
 STARTER_SPRINGFILE = `
-This is your Springfile. You can enter Spring '83 URLs, one on each line. This demo client will try its best to retrieve feeds, too, so feel free to drop in RSS and website URLs.
+This is your Springfile. You can enter Spring '83 URLs, one on each line. This demo client will try its best to retrieve RSS feeds, too, so feel free to drop in feed and website URLs. If a URL doesn't make sense to the client, nothing particularly bad will happen.
 
-Anything that's not a Spring '83 key or a URL will be ignored, so you can jot notes here, as well -- just like this. Here's a trick: the line preceding a key or URL will be used as its label, so consider typing an annotation that's meaningful to you.
+This Springfile is a default example, just to get you started. You should immediately start ripping things out!
+
+Anything that's not a Spring '83 key or a URL will be ignored, so you can jot notes here, as well -- just like this. Here's a trick: the line preceding a board or feed URL will be used as its label, so consider typing an annotation that's meaningful to you.
 
 Boards and feed items will be displayed in the order you list them here.
 

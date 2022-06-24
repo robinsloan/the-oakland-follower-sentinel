@@ -1,5 +1,6 @@
 <html>
 <head>
+  <title>Spring '83 Keypair Generator</title>
   <script src="/js/noble-ed25519.js"></script>
   <script>
 
@@ -35,10 +36,8 @@
       }
     }
 
-    let coin = new Audio("/media/coin.mp3");
-    coin.play();
-
     secret = nobleEd25519.utils.bytesToHex(secretBytes);
+    saveKeypairFile(secret, public);
 
     shouldShowProgress = false;
 
@@ -46,7 +45,8 @@
 
     progressDisplay.innerHTML = `The keypair file should have downloaded. You can drag that file into <a href="/client/">the client</a> to log in. You should also back it up somewhere secure. It provides your only access to your board, and there is no &ldquo;password reset&rdquo; available!`;
 
-    saveKeypairFile(secret, public);
+    const coin = new Audio("/media/coin.mp3");
+    coin.play();
   }
 
   let saveKeypairFile = function(secret, public) {
@@ -75,60 +75,60 @@
   });
   </script>
 
-<style>
-  html {
-    font-size: 18px;
-  }
+  <style>
+    html {
+      font-size: 18px;
+    }
 
-  body {
-    font-size: 1rem;
-    line-height: 1.25rem;
-    margin: 2rem;
-  }
+    body {
+      font-size: 1rem;
+      line-height: 1.25rem;
+      margin: 2rem;
+    }
 
-  p {
-    margin: 0 0 2rem 0;
-  }
+    p {
+      margin: 0 0 2rem 0;
+    }
 
-  main {
-    width: 100%;
-    max-width: 480px;
-  }
+    main {
+      width: 100%;
+      max-width: 480px;
+    }
 
-  generate-button {
-    display: inline-block;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    color: #fff;
-    background-color: #33c;
-    cursor: pointer;
-    user-select: none;
-    margin: 0 0 2rem 0;
-  }
+    generate-button {
+      display: inline-block;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      color: #fff;
+      background-color: #33c;
+      cursor: pointer;
+      user-select: none;
+      margin: 0 0 2rem 0;
+    }
 
-  generate-button:hover {
-    background-color: #3c3;
-  }
+    generate-button:hover {
+      background-color: #3c3;
+    }
 
-  generate-button.generating {
-    pointer-events: none;
-    background-color: #ddd;
-  }
+    generate-button.generating {
+      pointer-events: none;
+      background-color: #ddd;
+    }
 
-  generate-button.generating:hover {
-    background-color: #ddd;
-  }
-</style>
+    generate-button.generating:hover {
+      background-color: #ddd;
+    }
+  </style>
 
 </head>
 
 <body>
-<main>
-<p>Press this button to find a conforming Spring &rsquo;83 keypair. This should take between 10-30 minutes. When the program finishes, it will play a sound and download the keypair file.</p>
+  <main>
+    <p>Press this button to find a conforming Spring &rsquo;83 keypair. This should take between 10-30 minutes. When the program finishes, it will play a sound and download the keypair file.</p>
 
-<generate-button>Generate keypair</generate-button>
+    <generate-button>Generate keypair</generate-button>
 
-<p class="started"></p>
-<p class="progress"></p>
-</main>
+    <p class="started"></p>
+    <p class="progress"></p>
+  </main>
 </body>
