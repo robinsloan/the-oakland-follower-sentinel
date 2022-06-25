@@ -237,7 +237,7 @@ Client.setup = async function() {
 
   // Cmd-shift-P key shortcut to show/hide publish panel
   document.addEventListener("keydown", (e) => {
-    if (e.code == "KeyP") {
+    if (e.code == "KeyY") {
       if (e.shiftKey && e.metaKey) {
         Client.main.classList.toggle("minimized");
       }

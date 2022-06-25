@@ -26,7 +26,7 @@ Spring '83 doesn't "do" discovery or promotion on the protocol level, so publici
 
 You can press `Esc` to toggle the Springfile editor. 
 
-You can press `Cmd-Shift-P` to toggle the publishing panel and get yourself a bit more viewing space.
+You can press `Cmd-Shift-Y` to toggle the publishing panel and get yourself a bit more viewing space.
 
 If you click on a link to a Spring '83 URL, the client will show you a preview, with a quick-selectable URL that makes it easy to add that board to your Springfile, if you wish.
 
