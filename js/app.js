@@ -83,7 +83,7 @@ Client.setup = async function() {
 
   const backupServerSaved = Client.getBackupServer();
   if (!backupServerSaved) {
-    localStorage.setItem("backup-server", "https://spring83.kindrobot.ca/");
+    localStorage.setItem("backup-server", "none");
     Client.backupServerSelect.value = Client.getBackupServer();
   } else {
     Client.backupServerSelect.value = backupServerSaved;
@@ -1514,7 +1514,7 @@ Client.createFeedItem = function(feedKey) {
   if (feedContent) {
     feedArea.innerHTML = feedContent;
   } else {
-    feedArea.innerHTML = `<p>Nothing yet for ${feedSource.url}</p>`;
+    feedArea.innerHTML = `<p>I couldn't find a feed to display at ${feedSource.url}</p>`;
   }
 
   Client.itemGrid.append(feedItem);

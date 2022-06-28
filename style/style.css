@@ -554,17 +554,19 @@ editor-zone server-zone {
 }
 
 editor-zone server-zone server-choice {
-  display: block;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
 }
 
 editor-zone server-choice label {
   display: inline-block;
-  width: 12rem;
+  width: auto;
 }
 
 editor-zone server-choice select {
   display: inline-block;
+  width: auto;
 }
 
 editor-zone key-zone {
