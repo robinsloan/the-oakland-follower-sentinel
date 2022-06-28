@@ -605,7 +605,7 @@ Client.toggleSpringfileEditor = function() {
 
 // -- Springfile sync --
 
-Client.CONFIG_SYNC = "https://sync.followersentinel.com/"
+Client.CONFIG_SYNC = "http://localhost:8787/"; // https://sync.followersentinel.com/"
 
 Client.setShouldSync = function(shouldSync) {
   let stringShouldSync;
@@ -650,9 +650,16 @@ Client.pullSpringfile = async function() {
 
   const public = Client.getPublicKey();
   const secret = Client.getSecretKey();
-  // Very simple authorization here: prove it's you!
-  const getAsBytes = Client.encoder.encode("GET");
-  const signatureBytes = await nobleEd25519.sign(getAsBytes, secret);
+  // very simple authorization here:
+  // sign the current time stamp, rounded to nearest 5 mins
+  // https://stackoverflow.com/questions/10789384/round-a-date-to-the-nearest-5-minutes-in-javascript
+  const now = new Date();
+  const block = 1000 * 60 * 5;
+  const fiveMinBlock = new Date(Math.round(now.getTime() / block) * block);
+  const timestamp = fiveMinBlock.toISOString().slice(0, 19) + "Z";
+  const timestampBytes = Client.encoder.encode(timestamp);
+
+  const signatureBytes = await nobleEd25519.sign(timestampBytes, secret);
   const signature = nobleEd25519.utils.bytesToHex(signatureBytes);
 
   const url = `${Client.CONFIG_SYNC}${public}`;
