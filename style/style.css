@@ -1,11 +1,53 @@
 @charset "UTF-8";
 
+/* DJR fun fonts */
+
+@font-face {
+  font-family: "Megazoid";
+  src: url("/fonts/Megazoid-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Bradley Initials DJR";
+  src: url("/font/djr/BradleyInitialsDJR-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
 @font-face {
   font-family: "Job Clarendon";
-  src: url("/font/job-clarendon/job-clarendon-variable.woff2") format("woff2");
+  src: url("/font/djr/JobClarendonVariable-VF.woff2") format("woff2");
   font-style: normal;
   font-weight: 100 900;
 }
+
+@font-face {
+  font-family: "Map Roman";
+  src: url("/font/djr/MapRomanVariable-VF.woff2") format("woff2");
+  font-style: normal;
+  font-weight: normal;
+  font-stretch: 50% 100%;
+}
+
+@font-face {
+  font-family: "Clavichord";
+  src: url("/font/djr/ClavichordVariable-VF.woff2") format("woff2");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Megabase";
+  src: url("/font/djr/Megabase-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: normal;
+}
+
+
+
+/* less fun fonts */
 
 @font-face {
   font-family: "JetBrains Mono";
@@ -43,10 +85,25 @@
 
   --board-shadow-offset: 2rem;
 
-  /* -- Spring '83 variables  -- */
+  /* -- fun fonts  -- */
+
+  --f-megazoid: "Megazoid";
+  --f-mz: var(--f-megazoid);
+
+  --f-bradley-initials: "Bradley Initials DJR";
+  --f-bi: var(--f-bradley-initials);
 
   --f-job-clarendon: "Job Clarendon";
   --f-jc: var(--f-job-clarendon);
+
+  --f-map-roman: "Map Roman";
+  --f-mr: var(--f-map-roman);
+
+  --f-clavichord: "Clavichord";
+  --f-cc: var(--f-clavichord);
+
+  --f-megabase: "Megabase";
+  --f-mb: var(--f-megabase);
 
   /* Selected from Riso colors: https://www.stencil.wiki/colors */
   --c-medium-blue: #3255A4;
