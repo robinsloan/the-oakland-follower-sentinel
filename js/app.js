@@ -1449,7 +1449,7 @@ Client.parseFeedSourceResponse = async function(feedKey, fetchedUrl,
         let feedTitleElement = xmlDOM.querySelector("channel title") || xmlDOM.querySelector("feed title");
         let itemTitleElement = item.querySelector("title");
 
-        let href = link?.getAttribute("href") || link?.innerHTML || "#";
+        let href = link?.getAttribute("href") || link?.textContent || "#";
         let feedTitleText = feedTitleElement?.text || feedTitleElement?.childNodes[0]?.nodeValue || "unknown title";
         let itemTitleText = itemTitleElement?.text || itemTitleElement?.childNodes[0]?.nodeValue || href;
 
