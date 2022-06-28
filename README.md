@@ -16,6 +16,8 @@ Perhaps you'd like to publish a board of your own. To "unlock" the client's publ
 
 This takes some time; have patience, and faith.
 
+Alternatively you can import an existing keypair. The file format is simply a single line with the `SECRET` key followed by the `PUBLIC` key, no spaces.
+
 Once you have a keypair file, you can use it to unlock the publishing panel and, perhaps, jot something on your board! If, having done this, you'd like me to add it the running list publicized in [this board](https://bogbody.biz/0036a2f1d481668649bc5c2a50f40cc9a65d3244eff0c0002af812e6183e0523), just send me an email, `robin@robinsloan.com`.
 
 Your keypair file is irreplaceable, so be sure to back it up somewhere, somehow. If you misplace it, you'll lose access to the associated board, and you'll have to start over with a new keypair.
