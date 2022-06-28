@@ -605,7 +605,7 @@ Client.toggleSpringfileEditor = function() {
 
 // -- Springfile sync --
 
-Client.CONFIG_SYNC = "http://localhost:8787/"; // https://sync.followersentinel.com/"
+Client.CONFIG_SYNC =  "https://sync.followersentinel.com/";
 
 Client.setShouldSync = function(shouldSync) {
   let stringShouldSync;
