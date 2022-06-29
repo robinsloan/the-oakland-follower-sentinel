@@ -1588,6 +1588,10 @@ https://abjectsubli.me/feed.xml
 Sven, board artisan
 https://bogbody.biz/a5e8086dd47d0380ed16c641070636a3f06fc89b6f6dde45e756f70fc83e0723
 
+Robin Rendle, typophile
+https://bogbody.biz/9e2dbf6142de0965b2782d719d998244565d7afffb2556517a7c1907783e0823
+
+
 Spring '83 dev board
 https://bogbody.biz/ca93846ae61903a862d44727c16fed4b80c0522cab5e5b8b54763068b83e0623
 
