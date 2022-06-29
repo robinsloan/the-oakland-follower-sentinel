@@ -1445,11 +1445,12 @@ Client.parseFeedSourceResponse = async function(feedKey, fetchedUrl,
     if (xmlDOM) {
       let item = xmlDOM.querySelector(`item`) || xmlDOM.querySelector(`entry`);
       if (item) {
-        let link = item.querySelector(`link[type="text/html"]`) || item.querySelector("link");
+        let link = item.querySelector(`link[type="text/html"]`) || item.querySelector("link") || item.querySelector("enclosure");
+
         let feedTitleElement = xmlDOM.querySelector("channel title") || xmlDOM.querySelector("feed title");
         let itemTitleElement = item.querySelector("title");
 
-        let href = link?.getAttribute("href") || link?.textContent || "#";
+        let href = link?.getAttribute("href") || link?.textContent || link?.getAttribute("url") || "#";
         let feedTitleText = feedTitleElement?.text || feedTitleElement?.childNodes[0]?.nodeValue || "unknown title";
         let itemTitleText = itemTitleElement?.text || itemTitleElement?.childNodes[0]?.nodeValue || href;
 
