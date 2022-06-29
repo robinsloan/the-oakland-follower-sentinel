@@ -478,6 +478,7 @@ board-item.preview board-area board-content {
 feed-item {
   position: relative;
   min-width: var(--column-width);
+  break-inside: avoid-column;
 }
 
 feed-item feed-area {
