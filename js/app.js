@@ -1576,8 +1576,8 @@ set sync true
 Robin's board
 https://bogbody.biz/1e4bed50500036e8e2baef40cb14019c2d49da6dfee37ff146e45e5c783e0123
 
-Boards to follow
-https://bogbody.biz/0036a2f1d481668649bc5c2a50f40cc9a65d3244eff0c0002af812e6183e0523
+KQED Forum
+https://feeds.megaphone.fm/KQINC9557381633
 
 Alan Jacobs
 https://blog.ayjay.org/feed/
@@ -1672,6 +1672,9 @@ https://www.ruby-lang.org/en/feeds/news.rss
 
 Included to verify that broken feeds are handled appropriately:
 https://feeds.transistor.fm/cassettes-with-william-july
+
+Boards to follow
+https://bogbody.biz/0036a2f1d481668649bc5c2a50f40cc9a65d3244eff0c0002af812e6183e0523
 
 Ever-changing test board
 https://bogbody.biz/ab589f4dde9fce4180fcf42c7b05185b0a02a5d682e353fa39177995083e0583
