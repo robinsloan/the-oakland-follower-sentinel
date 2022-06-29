@@ -558,14 +558,15 @@ editor-zone drop-zone {
   z-index: 1000;
   background-color: var(--c-cornflower);
 
+  padding: 2rem;
   /* this is a hack, because I don't know why I'm getting overflow-x in the first place */
   overflow-x: hidden;
 }
 
 editor-zone drop-zone p {
   text-align: center;
-  margin-bottom: 0.25rem;
   color: var(--c-black);
+  margin: 0 0 2rem 0;
 }
 
 editor-zone drop-zone a,
