@@ -1624,6 +1624,9 @@ https://aworkinglibrary.com/feed/index.xml
 Ryan
 https://bogbody.biz/f539c49d389b1e141c97450cdabc83d41615303106c07f63c8975b5dc83e0623
 
+Nat
+https://bogbody.biz/46b8442a9e23599cb121a435216d2afb3a7748d3794201e30d601540983e0123
+
 TOOZE!
 https://adamtooze.substack.com/
 
