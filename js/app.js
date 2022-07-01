@@ -1586,18 +1586,26 @@ https://blog.ayjay.org/feed/
 Elisabeth Nicula's HTML art
 https://abjectsubli.me/feed.xml
 
-Sven, board artisan
-https://bogbody.biz/a5e8086dd47d0380ed16c641070636a3f06fc89b6f6dde45e756f70fc83e0723
-
 Robin Rendle, typophile
 https://bogbody.biz/9e2dbf6142de0965b2782d719d998244565d7afffb2556517a7c1907783e0823
 
+honor, artist
+https://bogbody.biz/e310afd5a0529279947e4bb79ae686543102a8e864867dd4b8e90101e83e0123
 
 Spring '83 dev board
 https://bogbody.biz/ca93846ae61903a862d44727c16fed4b80c0522cab5e5b8b54763068b83e0623
 
-honor, artist
-https://bogbody.biz/e310afd5a0529279947e4bb79ae686543102a8e864867dd4b8e90101e83e0123
+Boards to follow
+https://bogbody.biz/0036a2f1d481668649bc5c2a50f40cc9a65d3244eff0c0002af812e6183e0523
+
+Phenomenal World newsletter
+https://us16.campaign-archive.com/feed?u=30638b4a1754ffe5cdc9f22c1&id=31efc3f9d3
+
+Dirt newsletter
+https://dirt.substack.com/feed
+
+Flywheel newsletter
+https://www.newsletter.rideflywheel.com/feed
 
 Chase, designer
 https://bogbody.biz/45deb6f6d50b7b2e3a0aba5aa199823a3c0e64e5f604196e429bc41d683e0623
@@ -1648,15 +1656,6 @@ https://infovore.org/
 Roy
 https://bogbody.biz/db8a22f49c7f98690106cc2aaac15201608db185b4ada99b5bf4f222883e1223
 
-Phenomenal World newsletter
-https://us16.campaign-archive.com/feed?u=30638b4a1754ffe5cdc9f22c1&id=31efc3f9d3
-
-Dirt newsletter
-https://dirt.substack.com/feed
-
-Flywheel newsletter
-https://www.newsletter.rideflywheel.com/feed
-
 Hiroko's blog
 http://rhiroko.blog.fc2.com/
 
@@ -1673,9 +1672,6 @@ https://www.ruby-lang.org/en/feeds/news.rss
 
 Included to verify that broken feeds are handled appropriately:
 https://feeds.transistor.fm/cassettes-with-william-july
-
-Boards to follow
-https://bogbody.biz/0036a2f1d481668649bc5c2a50f40cc9a65d3244eff0c0002af812e6183e0523
 
 Ever-changing test board
 https://bogbody.biz/ab589f4dde9fce4180fcf42c7b05185b0a02a5d682e353fa39177995083e0583
