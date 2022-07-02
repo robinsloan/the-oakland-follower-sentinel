@@ -517,7 +517,8 @@ Client.previewBoardAtURL = async function(url) {
   try {
     response = await fetch(url, {
       method: "GET",
-      mode: "cors"
+      mode: "cors",
+      headers: {"Spring-Version": "83"}
     });
   } catch (e) {
     console.log("Error with fetch; server not found? TODO: document.");

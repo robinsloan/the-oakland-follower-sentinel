@@ -370,6 +370,7 @@ board-item {
   height: calc(var(--column-width) / 0.7071); /* 1 / sqrt(2) */
   break-inside: avoid-column;
   margin: 0 auto 4rem auto;
+  contain: size layout paint style; /* woohoo */
 }
 
 board-item board-area {
@@ -411,7 +412,6 @@ board-item.refreshed board-area board-label:after {
 
 /* Remember, these all "beat" the Shadow DOM declarations */
 board-item board-area board-content {
-  contain: content;
   display: block;
   position: absolute;
   top: 2rem;
@@ -423,6 +423,7 @@ board-item board-area board-content {
   overflow-x: hidden;
   overflow-y: auto;
   z-index: 100;
+  contain: size layout paint style; /* woohoo */
 }
 
 board-item board-area view-source {
