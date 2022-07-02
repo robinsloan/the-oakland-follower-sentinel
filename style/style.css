@@ -160,7 +160,7 @@ input {
 
 html {
   position: relative;
-  font-size: 11px; /* base REM */
+  font-size: 11px; /* base rem */
   min-height: 100%;
   height: 100%;
   overflow-x: hidden;
