@@ -60,6 +60,4 @@ This demo client will not be a long-term project -- I simply am not an applicati
 
 Important for me, as much as for anyone else!
 
-I will continue to tinker here, and I'll happily accept bug reports, although I might not be able to do anything about them. I am not seeking pull requests, but/and you should feel free to use this code as a starting point for your own explorations.
-
 Thanks for investigating!

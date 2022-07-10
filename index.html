@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 
 <!-- this rules -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; font-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; form-action *; connect-src *;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; font-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' https://unpkg.com; form-action *; connect-src *;">
 <!-- ref: worker-src blob: -->
 
 <link rel="icon" href="/media/fs-favicon-64.png" type="image/png">
@@ -25,10 +25,12 @@
 <meta name="twitter:title" content="The Oakland Follower-Sentinel">
 
 <link rel="stylesheet" href="/style/style.css">
+
 <script src="/js/noble-ed25519.js"></script>
 <script src="/js/marked.min.js"></script>
 <script src="/ace/ace.js"></script>
 <script src="/ace/ext-language_tools.js"></script>
+
 <script src="/js/app.js"></script>
 
 </head>
