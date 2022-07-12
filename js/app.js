@@ -3,8 +3,6 @@ var Client = {};
 // NOTE THAT web crypto libraries aren't available in local network,
 // non-localhost environments. For the sake of future debugging.
 
-Client.DEV = false;
-
 // Rather than create them every time I need them:
 Client.encoder = new TextEncoder();
 Client.parser = new DOMParser();
@@ -1553,10 +1551,10 @@ DEFAULT_BOARD_CSS = `
   :host {
     background-color: var(--c-paper-bright);
     box-sizing: border-box;
-    padding: 2rem;
+    padding: 2em;
   }
+  p, h1, h2, h3, h4, h5 { margin: 0 0 2em 0; }
   time { display: none; }
-  p, h1, h2, h3, h4, h5 { margin: 0 0 2rem 0; }
 </style>
 `.trim();
 
@@ -1614,6 +1612,9 @@ https://bogbody.biz/45deb6f6d50b7b2e3a0aba5aa199823a3c0e64e5f604196e429bc41d683e
 Chase's blog
 https://chasem.co/feed.xml
 
+Alexis
+https://bogbody.biz/ad412a52b2fff4e9474a95d1e777a51dc463359f2789ba7989c442b2283e0923
+
 Peter, keymaster
 https://bogbody.biz/47e0f417f42634b42917124c8c9709714ac28c632830c2f96f8e52beb83e0623
 
@@ -1657,8 +1658,14 @@ https://dancohen.org/feed/
 Tom Armitage
 https://infovore.org/
 
+Sunny
+https://bogbody.biz/9158ffe2570fc9f12d214fe9c72d1ea10c7f217d5eee62a9958936b4483e0623
+
 Roy
 https://bogbody.biz/db8a22f49c7f98690106cc2aaac15201608db185b4ada99b5bf4f222883e1223
+
+Ryan
+https://bogbody.biz/ac83c5127baf539b2132f032ed188c86d849c0023d2e7368ec1b5034383e0323
 
 Hiroko's blog
 http://rhiroko.blog.fc2.com/
